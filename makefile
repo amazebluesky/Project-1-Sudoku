@@ -1,12 +1,12 @@
-project1:sudoku.o main.o
-	g++ -o project1 main.o sudoku.o
+project1:Sudoku.o main.o
+	g++ -o project1 main.o Sudoku.o
 
-sudoku.o:sudoku.cpp sudoku.h
-	g++ -c sudoku.cpp
+Sudoku.o:Sudoku.cpp Sudoku.h
+	g++ -c Sudoku.cpp
 
-main.o:main.cpp sudoku.h
+main.o:main.cpp Sudoku.h
 	g++ -c main.cpp
 
 clean:
-	rm sudoku.o main.o project1
+	rm Sudoku.o main.o project1
 
