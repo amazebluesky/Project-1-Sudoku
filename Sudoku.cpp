@@ -120,7 +120,7 @@ void Sudoku::printGrid(int c[N][N])
 	for (int row = 0; row < N; row++)
 	{
 		for (int col = 0; col < N; col++)
-			cout<<c[row][col]<<"  ";
+			cout<<c[row][col]<<" ";
 		cout<<endl;
 	}
 }
@@ -168,7 +168,9 @@ void Sudoku::solve(){
 					 }
 					}
 				}
-			 cout<<"1"<<endl;}
+			 cout<<"1"<<endl;
+			printGrid(c);
+	}
 	else{ 
 		cout<<"0"<<endl;
 	}
