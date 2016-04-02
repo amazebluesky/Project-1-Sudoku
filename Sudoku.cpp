@@ -191,6 +191,11 @@ void Sudoku::changeNum(int a , int b){
 		}
 		}
 	}
+	for(int i=0;i<9;i++){
+		for(int j=0;j<9;j++){
+			c1[i][j]=c[i][j];
+		}
+	}
 }
 void Sudoku::changeRow(int a , int b){
 	int temp1[9];
@@ -275,7 +280,12 @@ void Sudoku::changeRow(int a , int b){
 			c[2][i]=temp3[i];
 		}
 	}
-}
+	for(int i=0;i<9;i++){
+		for(int j=0;j<9;j++){
+			c1[i][j]=c[i][j];
+		}
+	}
+	}
 void Sudoku::changeCol(int a , int b){
 	int temp1[9][1];
 	int temp2[9][1];
@@ -359,6 +369,11 @@ void Sudoku::changeCol(int a , int b){
 			c[i][2]=temp3[i][1];
 		}
 	}
+	for (int i=0;i<9;i++){
+		for (int j=0;j<9;j++){
+			c1[i][j]=c[i][j];
+	}
+	}
 }
 void Sudoku::rotate(int n){
 	int i;
@@ -403,19 +418,18 @@ void Sudoku::rotate(int n){
 			}
 		}
 		}
-		for(i=0;i<9;i++){
-			for(j=0;j<9;j++){
-				 cout<<c[i][j]<<" ";
+		for (int i=0;i<9;i++){
+			for (int j=0;j<9;j++)
+			{
+				c1[i][j]=c[i][j];
 			}
-			cout<<endl;
 		}
-		cout<<endl;
 }
 void Sudoku::flip(int n){
 	int i;
    	int j;
 	int b[9][9];
-	if (n==0){
+	if (n==1){
 		for(i=0;i<9;i++){
 			for(j=0;j<9;j++){
 				b[9-j-1][i]=c[j][i];
@@ -427,7 +441,7 @@ void Sudoku::flip(int n){
 			}
 		}
 	}
-	if (n==1){
+	if (n==0){
 		for(i=0;i<9;i++){
 			for(j=0;j<9;j++){
 				b[j][9-i-1]=c[j][i];
@@ -439,8 +453,11 @@ void Sudoku::flip(int n){
 			}
 		}
 	}
-
-
+	for (int i=0;i<9;i++){
+		 for (int j=0;j<9;j++)
+		 {
+			  c1[i][j]=c[i][j];
+		 }}
 }
 void Sudoku::change(){
 	srand(time(NULL));
