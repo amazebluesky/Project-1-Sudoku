@@ -4,9 +4,9 @@
 #include<string>
 #include<cstdlib>
 #include "Sudoku.h"
-#define UNASSIGNED 0
+#define U 0
 using namespace std;
-bool Sudoku::SolveSudoku(int c[N][N])
+bool Sudoku::Sudoku2(int c[N][N])
 {
 	int row;
 	int col;
@@ -15,44 +15,44 @@ bool Sudoku::SolveSudoku(int c[N][N])
 		cout<<"0"<<endl;
 		exit(1);
 	}
-	if (!FindUnassignedLocation(c, row, col))
+	if (!FUL(c, row, col))
 		return true;
 	for (int num = 1; num <= 9; num++)
 	{
-		if (isSafe(c, row, col, num))
+		if (Safe(c, row, col, num))
 		{
 			c[row][col] = num;
-			if (SolveSudoku(c))
+			if (Sudoku2(c))
 				return true;
-			c[row][col] = UNASSIGNED;
+			c[row][col] = U;
 		}
 	}
 	return false;
 }
-bool Sudoku::SolveSudoku1(int c1[N][N])
+bool Sudoku::Sudoku1(int c1[N][N])
 {
 	int row;
 	int col;
-	if (!FindUnassignedLocation(c1, row, col))
+	if (!FUL(c1, row, col))
 		return true;
 	for (int num = 9; num >=1; num--)
 	{
-		if (isSafe(c1, row, col, num))
+		if (Safe(c1, row, col, num))
 		{
 			c1[row][col] = num;
-			if (SolveSudoku1(c1))
+			if (Sudoku1(c1))
 				return true;
-			c1[row][col] = UNASSIGNED;
+			c1[row][col] = U;
 		}
 	}
 	return false;
 }
 
-bool Sudoku::FindUnassignedLocation(int c[N][N], int &row, int &col)
+bool Sudoku::FUL(int c[N][N], int &row, int &col)
 {
 	for (row = 0; row < N; row++)
 		for (col = 0; col < N; col++)
-			if (c[row][col] == UNASSIGNED)
+			if (c[row][col] == U)
 				return true;
 	return false;
 }
@@ -87,35 +87,35 @@ bool Sudoku::originCol(int c[N][N], int col, int num1)
 	return true;
 }
 
-bool Sudoku::UsedInRow(int c[N][N], int row, int num)
+bool Sudoku::Row(int c[N][N], int row, int num)
 {
 	for (int col = 0; col < N; col++)
 		if (c[row][col] == num)
 			return true;
 	return false;
 }
-bool Sudoku::UsedInCol(int c[N][N], int col, int num)
+bool Sudoku::Col(int c[N][N], int col, int num)
 {
 	for (int row = 0; row < N; row++)
 		if (c[row][col] == num)
 			return true;
 	return false;
 }
-bool Sudoku::UsedInBox(int c[N][N], int boxStartRow, int boxStartCol, int num)
+bool Sudoku::Box(int c[N][N], int SR, int SC, int num)
 {
 	for (int row = 0; row < 3; row++)
 		for (int col = 0; col < 3; col++)
-			if (c[row+boxStartRow][col+boxStartCol] == num)
+			if (c[row+SR][col+SC] == num)
 				return true;
 	return false;
 }
-bool Sudoku::isSafe(int c[N][N], int row, int col, int num)
+bool Sudoku::Safe(int c[N][N], int row, int col, int num)
 {
-	return !UsedInRow(c, row, num) && !UsedInCol(c, col, num) &&
-		!UsedInBox(c, row - row % 3 , col - col % 3, num);
+	return !Row(c, row, num) && !Col(c, col, num) &&
+		!Box(c, row - row % 3 , col - col % 3, num);
 }
 
-void Sudoku::printGrid(int c[N][N])
+void Sudoku::print(int c[N][N])
 {
 	for (int row = 0; row < N; row++)
 	{
@@ -159,7 +159,7 @@ void Sudoku::readIn(){
 }
 void Sudoku::solve(){
 
-	if (SolveSudoku(c)==true && SolveSudoku1(c1)==true){
+	if (Sudoku2(c)==true && Sudoku1(c1)==true){
 			 for(int i=0;i<9;i++){
 				 for(int j=0;j<9;j++){
 					 if(c[i][j]!=c1[i][j]){
@@ -169,7 +169,7 @@ void Sudoku::solve(){
 					}
 				}
 			 cout<<"1"<<endl;
-			printGrid(c);
+			print(c);
 	}
 	else{ 
 		cout<<"0"<<endl;
@@ -470,5 +470,5 @@ void Sudoku::change(){
 void Sudoku::transform(){
 	readIn();
 	change();
-	printGrid(c);
+	print(c);
 }

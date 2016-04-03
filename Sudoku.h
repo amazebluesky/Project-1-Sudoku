@@ -15,16 +15,16 @@ class Sudoku{
 		#define N 9
 		int c[N][N];
 		int c1[N][N];
-		bool SolveSudoku1(int c1[N][N]);
-		bool SolveSudoku(int c[N][N]);
-		bool FindUnassignedLocation(int c[N][N], int &row, int &col);
+		bool Sudoku1(int c1[N][N]);
+		bool Sudoku2(int c[N][N]);
+		bool FUL(int c[N][N], int &row, int &col);
 		bool originRow(int c[N][N],int row,int num1);
 		bool originCol(int c[N][N],int col ,int num1);
-		bool UsedInRow(int c[N][N], int row, int num);
-		bool UsedInCol(int c[N][N], int col, int num);
-		bool UsedInBox(int c[N][N], int boxStartRow, int boxStartCol, int num);
-		bool isSafe(int c[N][N], int row, int col, int num);
-		void printGrid(int c[N][N]);
+		bool Row(int c[N][N], int row, int num);
+		bool Col(int c[N][N], int col, int num);
+		bool Box(int c[N][N], int SR, int SC, int num);
+		bool Safe(int c[N][N], int row, int col, int num);
+		void print(int c[N][N]);
 	private:
 };
 
